@@ -1,0 +1,36 @@
+name: Build oVirt TinyCore
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install GenISOImage
+        run: sudo apt update && sudo apt install -y genisoimage
+      - name: Install Packer
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install packer
+      - name: Install QEMU
+        run: sudo apt update && sudo apt install -y qemu-utils qemu qemu-kvm gocr
+      - name: Run build script
+        run: sudo ./build.sh
+      - name: Run Packer
+        run: PACKER_LOG=1 packer build .
+      - name: Move all artifacts to a single directory
+        run: |
+          mkdir output
+          cp -av builddir/oVirtTinyCore*.iso output/
+          cp -av qcowbuilddir/*.qcow2 output/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: oVirtTinyCoreLinux
+          if-no-files-found: error
+          path: |
+            output/*
