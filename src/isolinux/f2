@@ -1,0 +1,24 @@
+Type one of the following:  plus  core
+and optionally enter one or more additional space separated options:
+
+ tce={hda1|sda1}            Specify restore TCE apps directory
+ restore={hda1|sda1|floppy} Specify saved configuration location
+ waitusb=X                  Wait X seconds for slow USB devices
+ swapfile{=hda1}            Scan or specify swapfile
+ home={hda1|sda1}           Specify persistent home directory
+ opt={hda1|sda1}            Specify persistent opt directory
+ lst=yyy.lst                Load alternate static yyy.lst on boot
+ base                       Do not load user extensions
+ noqemuga                   Do not start Qemu Guest Agent
+ norestore                  Turn off the automatic restore
+ safebackup                 Saves a backup copy (mydatabk.tgz)
+ showapps                   Display application names when booting
+ iso=sdb1                   Boot directly from iso file at sdb1
+ iso==/mnt/sdb1/multiboot/ISOS/TinyCore-4.4.iso		
+
+
+
+
+
+ Press ESC to return to the main menu.
+ Press F2, F3, or F4 to view additional boot options.
