@@ -34,3 +34,20 @@ jobs:
           if-no-files-found: error
           path: |
             output/*
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: oVirtTinyCoreLinux
+          path: dist/
+      - name: Create release
+        run: gh release create "${GITHUB_REF##*/}" --generate-notes ./dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
