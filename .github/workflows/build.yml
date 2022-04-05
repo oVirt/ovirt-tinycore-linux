@@ -38,6 +38,16 @@ jobs:
           if-no-files-found: error
           path: |
             output/*
+      - name: Run tests
+        run: ./test.sh
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: ScreenShot
+          if-no-files-found: error
+          path: |
+            oVirtTinyCore.png
   release:
     name: Release
     needs: build
