@@ -24,6 +24,8 @@ zcat ../core.gz | cpio -idmv
 popd
 
 wget http://www.tinycorelinux.net/13.x/x86/tcz/glib2.tcz
+wget http://www.tinycorelinux.net/13.x/x86/tcz/ipv6-netfilter-5.15.10-tinycore.tcz
+wget http://www.tinycorelinux.net/13.x/x86/tcz/ipv6-netfilter-5.15.10-tinycore.tcz.md5.txt
 wget http://www.tinycorelinux.net/13.x/x86/tcz/qemu.tcz
 wget http://www.tinycorelinux.net/13.x/x86/tcz/udev-lib.tcz
 
@@ -34,6 +36,15 @@ mount glib2.tcz mnt
 cp -av mnt/usr/local/lib/libglib-2.0.so* core.new/usr/local/lib/
 cp -av mnt/usr/local/lib/libgthread-2.0.so* core.new/usr/local/lib/
 umount mnt
+
+cp -av ipv6-netfilter-5.15.10-tinycore.tcz* tmp/cde/optional/
+echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cde/onboot.lst
+echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cde/onboot.CLI.lst
+echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cde/copy2fs.lst
+
+mkdir -p tmp/cdeCLI/optional/
+cp -avl tmp/cde/optional/ipv6-netfilter-5.15.10-tinycore.tcz* tmp/cdeCLI/optional/
+echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cdeCLI/onboot.lst
 
 mount qemu.tcz mnt
 cp -av mnt/usr/local/bin/qemu-ga core.new/usr/bin/

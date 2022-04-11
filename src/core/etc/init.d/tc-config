@@ -85,6 +85,7 @@ for i in `cat /proc/cmdline`; do
 				showapps) SHOWAPPS=1 ;;
 				norestore) NORESTORE=1 ;;
 				noautologin) NOAUTOLOGIN=1 ;;
+				noipv6) NOIPV6=1 ;;
 				noqemuga) NOQEMUGA=1 ;;
 				pause) PAUSE=1 ;;
 			esac
@@ -633,6 +634,10 @@ if [ -n "$NODHCP" ]; then
 else
 	[ -z "$DHCP_RAN" ] && /etc/init.d/dhcp.sh &
 	[ -z "$NORTC" ] || /etc/init.d/settime.sh &
+fi
+
+if [ -z "$NOIPV6" ]; then
+	modprobe ipv6
 fi
 
 if [ -z "$NOQEMUGA" ]; then

@@ -32,7 +32,7 @@ source "qemu" "qemu" {
         # Bootloader
         "y<wait2><enter><wait2>",
         # Extensions
-        "<wait2><enter>",
+        "/mnt/sr0/cdeCLI<wait2><enter>",
         # ext4
         "3<wait2><enter><wait2>",
         # Boot options
