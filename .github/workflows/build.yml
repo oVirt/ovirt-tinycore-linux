@@ -1,4 +1,8 @@
 name: Build oVirt TinyCore
+permissions:
+  issues: write
+  pull-requests: write
+  contents: write
 on:
   push:
   pull_request:
