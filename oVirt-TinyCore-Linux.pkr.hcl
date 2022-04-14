@@ -36,7 +36,7 @@ source "qemu" "qemu" {
         # ext4
         "3<wait2><enter><wait2>",
         # Boot options
-        "<wait2><enter><wait2>",
+        "console=ttyS0,115200 console=tty0<wait2><enter><wait2>",
         # Confirm
         "y<wait2><enter>",
         # Wait for installation
