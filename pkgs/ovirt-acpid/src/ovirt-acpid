@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ ! -d /usr/local/etc/acpi/events ]; then
+  mkdir -p /usr/local/etc/acpi/events
+
+  cat > /usr/local/etc/acpi/events/power-btn << EOF
+event=button/power
+action=exitcheck.sh
+EOF
+fi
