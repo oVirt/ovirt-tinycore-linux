@@ -32,6 +32,30 @@ wget http://www.tinycorelinux.net/13.x/x86/tcz/udev-lib.tcz
 cp -av "${REPODIR}/sha256sums" .
 sha256sum -c sha256sums
 
+if [ ! -d tmp/cdeCLI/optional ]; then
+    mkdir -p tmp/cdeCLI/optional/
+fi
+
+if [ ! -f ${REPODIR}/pkgs/ovirt-acpid/ovirt-acpid.tcz ]; then
+    pushd ${REPODIR}/pkgs/ovirt-acpid/
+    ./build.sh
+    popd
+fi
+
+if [ ! -f ${REPODIR}/pkgs/ovirt-acpid/ovirt-acpid.tcz.md5.txt ]; then
+    pushd ${REPODIR}/pkgs/ovirt-acpid/
+    md5sum ovirt-acpid.tcz > ovirt-acpid.tcz.md5.txt
+    popd
+fi
+
+cp -av ${REPODIR}/pkgs/ovirt-acpid/ovirt-acpid.tcz* tmp/cde/optional/
+echo ovirt-acpid.tcz >> tmp/cde/onboot.lst
+echo ovirt-acpid.tcz >> tmp/cde/onboot.CLI.lst
+echo ovirt-acpid.tcz >> tmp/cde/copy2fs.lst
+
+cp -avl tmp/cde/optional/ovirt-acpid.tcz* tmp/cdeCLI/optional/
+echo ovirt-acpid.tcz >> tmp/cdeCLI/onboot.lst
+
 mount glib2.tcz mnt
 cp -av mnt/usr/local/lib/libglib-2.0.so* core.new/usr/local/lib/
 cp -av mnt/usr/local/lib/libgthread-2.0.so* core.new/usr/local/lib/
@@ -42,7 +66,6 @@ echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cde/onboot.lst
 echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cde/onboot.CLI.lst
 echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cde/copy2fs.lst
 
-mkdir -p tmp/cdeCLI/optional/
 cp -avl tmp/cde/optional/ipv6-netfilter-5.15.10-tinycore.tcz* tmp/cdeCLI/optional/
 echo ipv6-netfilter-5.15.10-tinycore.tcz >> tmp/cdeCLI/onboot.lst
 
