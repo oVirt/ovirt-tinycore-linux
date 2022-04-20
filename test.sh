@@ -72,8 +72,8 @@ log "⚙️ Starting VM with image..."
 
 sleep 240
 echo 'screendump /tmp/screendump.ppm
-quit' | nc localhost 2000 >/dev/null
-sleep 1
+system_powerdown' | nc localhost 2000 >/dev/null
+sleep 10
 echo -e "\033[2m"
 cat /tmp/qemu.log
 echo -e "\033[0m"
