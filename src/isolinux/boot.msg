@@ -5,7 +5,7 @@
 บ  /)oVTC(\          A Busybox & Fltk minimal desktop.                 บ
 บ (/-_--_-\)    Based on Tiny Core Linux - www.tinycorelinux.net       บ
 บ                                                                      บ
-บ oVirt customization by Lev Veyde <lveyde@redhat.com> - Version 13.5  บ
+บ oVirt customization by Lev Veyde <lveyde@redhat.com> - Version 13.6  บ
 ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
 
 Welcome to oVirt Tiny Core. This is a collection of extensions

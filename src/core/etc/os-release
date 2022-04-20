@@ -1,8 +1,8 @@
 NAME=oVirtTinyCore
-VERSION="13.5"
+VERSION="13.6"
 ID=ovirttinycore
-VERSION_ID=13.5
-PRETTY_NAME="oVirt TinyCoreLinux 13.5"
+VERSION_ID=13.6
+PRETTY_NAME="oVirt TinyCoreLinux 13.6"
 ANSI_COLOR="0;34"
 CPE_NAME="cpe:/o:tinycore:tinycore_linux:13.0"
 HOME_URL="http://tinycorelinux.net/"
