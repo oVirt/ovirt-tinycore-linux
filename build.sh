@@ -87,6 +87,6 @@ cp core.gz tmp/boot/
 
 cp -av ${REPODIR}/src/isolinux/* tmp/boot/isolinux/
 
-mkisofs -J -T -U -joliet-long -A "oVirtTinyCore" -V "oVirtTinyCore" -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -R -graft-points -o oVirtTinyCore-13.6.iso tmp/
+mkisofs -J -T -U -joliet-long -A "oVirtTinyCore" -V "oVirtTinyCore" -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -R -graft-points -o oVirtTinyCore-13.7.iso tmp/
 
 popd

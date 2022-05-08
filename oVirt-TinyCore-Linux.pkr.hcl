@@ -1,5 +1,5 @@
 source "qemu" "qemu" {
-    iso_url = "builddir/oVirtTinyCore-13.6.iso"
+    iso_url = "builddir/oVirtTinyCore-13.7.iso"
     iso_checksum = "none"
     output_directory = "qcowbuilddir"
     disk_size = "50M"
@@ -58,7 +58,7 @@ build {
     post-processor "shell-local" {
         inline = [
             "cd qcowbuilddir",
-            "qemu-img convert -c -O qcow2 oVirtTinyCore oVirtTinyCore-13.6.qcow2"
+            "qemu-img convert -c -O qcow2 oVirtTinyCore oVirtTinyCore-13.7.qcow2"
         ]
     }
 }
