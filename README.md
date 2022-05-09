@@ -8,4 +8,6 @@ Currently implemented features:
 * IPv6 support
 * ACPI support
 * Support for hot-pluggable CPUs and NICs
-  `NOTE: Support for Block devices is already included in plain TinyCore Linux, and hot-plugging RAM is generally only supported in 64-bit Linux kernels)`
+  `NOTE: Support for Block devices is already included in plain TinyCore Linux, and hot-plugging RAM is generally only supported in 64-bit Linux kernels` [^1]
+
+[^1]: https://www.kernel.org/doc/html/latest/admin-guide/mm/memory-hotplug.html
