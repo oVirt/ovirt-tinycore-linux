@@ -10,9 +10,9 @@ pushd builddir
 
 mkdir {mnt,tmp}
 
-wget http://www.tinycorelinux.net/13.x/x86/release/TinyCore-13.0.iso
+wget http://www.tinycorelinux.net/13.x/x86/release/TinyCore-13.1.iso
 
-mount -o loop,ro TinyCore-13.0.iso mnt
+mount -o loop,ro TinyCore-13.1.iso mnt
 cp -av mnt/* tmp/
 umount mnt
 
