@@ -8,6 +8,12 @@ if [ ! -d builddir ]; then
     mkdir builddir
 fi
 
+if [ ! -f ${REPODIR}/src/kernel/vmlinuz64 ]; then
+    pushd ${REPODIR}/src/kernel/
+    ./build.sh
+    popd
+fi
+
 pushd builddir
 
 mkdir {mnt,tmp}
@@ -86,6 +92,8 @@ find . | cpio -ov -H newc | gzip -9 > ../corepure64.gz
 popd
 
 cp corepure64.gz tmp/boot/
+
+cp -v ${REPODIR}/src/kernel/vmlinuz64 tmp/boot/
 
 cp -av ${REPODIR}/src/isolinux/* tmp/boot/isolinux/
 
