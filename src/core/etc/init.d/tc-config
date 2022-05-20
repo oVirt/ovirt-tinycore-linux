@@ -83,8 +83,11 @@ for i in `cat /proc/cmdline`; do
 				xsetup) XSETUP=1 ;;
 				laptop) LAPTOP=1 ;;
 				showapps) SHOWAPPS=1 ;;
-				norestore) NORESTORE=1 ;;
+				noacpid) NOACPID=1 ;;
 				noautologin) NOAUTOLOGIN=1 ;;
+				noipv6) NOIPV6=1 ;;
+				noqemuga) NOQEMUGA=1 ;;
+				norestore) NORESTORE=1 ;;
 				pause) PAUSE=1 ;;
 			esac
 		;;
@@ -632,6 +635,18 @@ if [ -n "$NODHCP" ]; then
 else
 	[ -z "$DHCP_RAN" ] && /etc/init.d/dhcp.sh &
 	[ -z "$NORTC" ] || /etc/init.d/settime.sh &
+fi
+
+if [ -z "$NOACPID" ]; then
+       /usr/local/etc/init.d/acpid start
+fi
+
+if [ -z "$NOIPV6" ]; then
+	modprobe ipv6
+fi
+
+if [ -z "$NOQEMUGA" ]; then
+	/usr/bin/qemu-ga -d
 fi
 
 [ -n "$CRON" ] && /etc/init.d/services/crond start

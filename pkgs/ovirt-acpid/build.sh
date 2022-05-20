@@ -13,7 +13,7 @@ fi
 
 pushd builddir
 
-wget http://www.tinycorelinux.net/13.x/x86/tcz/acpid.tcz
+wget http://www.tinycorelinux.net/13.x/x86_64/tcz/acpid.tcz
 
 cp -v "${PKGDIR}/src/acpid.tcz.md5.txt" .
 md5sum -c acpid.tcz.md5.txt

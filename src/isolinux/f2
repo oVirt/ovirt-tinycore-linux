@@ -9,14 +9,14 @@ and optionally enter one or more additional space separated options:
  opt={hda1|sda1}            Specify persistent opt directory
  lst=yyy.lst                Load alternate static yyy.lst on boot
  base                       Do not load user extensions
+ noacpid                    Do not start ACPI daemon
+ noipv6                     Do not load IPv6 kernel support
+ noqemuga                   Do not start Qemu Guest Agent
  norestore                  Turn off the automatic restore
  safebackup                 Saves a backup copy (mydatabk.tgz)
  showapps                   Display application names when booting
  iso=sdb1                   Boot directly from iso file at sdb1
  iso==/mnt/sdb1/multiboot/ISOS/TinyCore-4.4.iso		
-
-
-
 
 
 

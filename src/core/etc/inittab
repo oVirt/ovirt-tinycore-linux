@@ -5,13 +5,14 @@
 
 # /sbin/getty respawn shell invocations for selected ttys.
 tty1::respawn:/sbin/getty -nl /sbin/autologin 38400 tty1
+ttyS0::respawn:/sbin/getty 115200 ttyS0
 #tty2::respawn:/sbin/getty 38400 tty2
 #tty3::respawn:/sbin/getty 38400 tty3
 #tty4::askfirst:/sbin/getty 38400 tty4
 #tty5::askfirst:/sbin/getty 38400 tty5
 #tty6::askfirst:/sbin/getty 38400 tty6
 
-# Stuff to do when restarting the init 
+# Stuff to do when restarting the init
 # process, or before rebooting.
 ::restart:/etc/init.d/rc.shutdown
 ::restart:/sbin/init
