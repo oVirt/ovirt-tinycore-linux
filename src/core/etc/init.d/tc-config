@@ -653,6 +653,8 @@ fi
 
 /sbin/loadcpufreq 2>/dev/null &
 
+echo online_movable > /sys/devices/system/memory/auto_online_blocks
+
 /opt/bootsync.sh
 
 [ -n "$NOAUTOLOGIN" ] && echo "booting" > /etc/sysconfig/noautologin
