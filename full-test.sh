@@ -5,7 +5,7 @@ set -eao pipefail
 
 RET=0
 
-if [ ! -f "qcowbuilddir/oVirtTinyCore64-13.8.qcow2" ]; then
+if [ ! -f "qcowbuilddir/oVirtTinyCore64-13.9.qcow2" ]; then
   echo -e  "\033[0;31mPlease run 'packer build .' first\033[0m" >&2
   exit 1
 fi
@@ -67,7 +67,7 @@ log "⚙️ Starting VM with image..."
 
 nohup qemu-system-x86_64 \
     -nographic \
-    -drive file=$(pwd)/output/oVirtTinyCore64-13.8.qcow2,format=qcow2 \
+    -drive file=$(pwd)/output/oVirtTinyCore64-13.9.qcow2,format=qcow2 \
     -monitor telnet::2000,server,nowait >/tmp/qemu.log 2>/dev/null &
 
 log 'Waiting for the VM to start...'
