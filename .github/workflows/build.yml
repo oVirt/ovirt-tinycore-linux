@@ -27,11 +27,14 @@ jobs:
       - name: Run Packer
         run: PACKER_LOG=1 packer build .
       - name: Move all artifacts to a single directory
+        if: always()
         run: |
           mkdir output
           cp -av builddir/oVirtTinyCore*.iso output/
           cp -av qcowbuilddir/*.qcow2 output/
+          cp -av src/busybox/busybox.tar.gz output/
       - name: Upload artifacts
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: oVirtTinyCoreLinux

@@ -14,6 +14,13 @@ if [ ! -f ${REPODIR}/src/kernel/vmlinuz64 ]; then
     popd
 fi
 
+if [ ! -f ${REPODIR}/src/busybox/busybox.tar.gz ]; then
+    pushd ${REPODIR}/src/busybox/
+    ./build.sh
+    tar czvf busybox.tar.gz pkg/
+    popd
+fi
+
 pushd builddir
 
 mkdir {mnt,tmp}
@@ -96,6 +103,12 @@ cp -av mnt/usr/local/lib/* core.new/usr/local/lib/
 umount mnt
 
 cp -av ${REPODIR}/src/core/etc/* core.new/etc/
+
+cp -av ${REPODIR}/src/busybox/pkg/bin/busybox* core.new/bin/
+
+pushd core.new/usr/bin
+ln -s ../../bin/busybox udhcp6
+popd
 
 pushd core.new
 find . | cpio -ov -H newc | gzip -9 > ../corepure64.gz

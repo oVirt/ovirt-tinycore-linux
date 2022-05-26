@@ -1,0 +1,6 @@
+a8f202fa9d26874cc99d47ca5aa8ae9fb4e4658d6e17a18be599e4ecde8c9eab  busybox-1.27.1-wget-make-default-timeout-configurable.patch
+0545dfa94703a69dd2b89e92cc385a5904988e4723195a6929b08db8a5498f28  busybox-1.29.3_root_path.patch
+abe67af6603f98910c249f8d22bed657271ab86c8bb35ec14b0ac3cfdda2104e  busybox-1.33.0_modprobe.patch
+9d1448e738e8508c891929830321d5fd60140b8f18398521855a079328d17497  busybox-1.33.0_skip-loop-control.patch
+3a2d2840a74badf71de1ed0a93fa84bb886705215f4388695df11ff04e0d85bd  busybox-1.33.0_tc_depmod.patch
+415fbd89e5344c96acf449d94a6f956dbed62e18e835fc83e064db33a34bd549  busybox-1.34.1.tar.bz2
