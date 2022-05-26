@@ -107,6 +107,11 @@ cp -v ${REPODIR}/src/kernel/vmlinuz64 tmp/boot/
 
 cp -av ${REPODIR}/src/isolinux/* tmp/boot/isolinux/
 
-mkisofs -J -T -U -joliet-long -A "oVirtTinyCore64" -V "oVirtTinyCore64" -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -R -graft-points -o oVirtTinyCore64-13.9.iso tmp/
+mkisofs -U -J -joliet-long -A "oVirtTinyCore64" -V "oVirtTinyCore64"\
+ -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat\
+ -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot\
+ -R -graft-points -e EFI/BOOT/efiboot.img\
+ -o oVirtTinyCore64-13.9.iso\
+ tmp/
 
 popd
