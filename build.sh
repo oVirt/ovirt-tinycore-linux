@@ -3,6 +3,9 @@
 
 set -e
 
+SBIN_APPLETS="ip ipaddr iplink ipneigh iproute iprule iptunnel"
+USR_BIN_APPLETS="udhcpc6"
+
 REPODIR=$(pwd)
 if [ ! -d builddir ]; then
     mkdir builddir
@@ -104,10 +107,20 @@ umount mnt
 
 cp -av ${REPODIR}/src/core/etc/* core.new/etc/
 
-cp -av ${REPODIR}/src/busybox/pkg/bin/busybox* core.new/bin/
+cp -av ${REPODIR}/src/busybox/bin/busybox core.new/bin/
+
+pushd core.new/sbin
+for applet in ${SBIN_APPLETS}
+do
+  ln -s ../bin/busybox ${applet}
+done
+popd
 
 pushd core.new/usr/bin
-ln -s ../../bin/busybox udhcp6
+for applet in ${USR_BIN_APPLETS}
+do
+  ln -s ../../bin/busybox ${applet}
+done
 popd
 
 pushd core.new
