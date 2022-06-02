@@ -16,4 +16,6 @@ for DEVICE in $NETDEVICES; do
     trap "" 2 3 11
     sleep 1
   fi
+
+/usr/bin/udhcpc6 -b -i $DEVICE -s /usr/share/udhcpc/default6.script -p /var/run/udhcpc6.$DEVICE.pid >/dev/null 2>&1 &
 done

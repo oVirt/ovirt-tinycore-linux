@@ -107,6 +107,8 @@ umount mnt
 
 cp -av ${REPODIR}/src/core/etc/* core.new/etc/
 
+cp -av ${REPODIR}/src/core/usr/share/udhcpc/* core.new/usr/share/udhcpc/
+
 cp -av ${REPODIR}/src/busybox/bin/busybox core.new/bin/
 
 pushd core.new/sbin
