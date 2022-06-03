@@ -3,6 +3,8 @@
 
 set -e
 
+. ./version
+
 SBIN_APPLETS="ip ipaddr iplink ipneigh iproute iprule iptunnel"
 USR_BIN_APPLETS="udhcpc6"
 
@@ -106,6 +108,7 @@ cp -av mnt/usr/local/lib/* core.new/usr/local/lib/
 umount mnt
 
 cp -av ${REPODIR}/src/core/etc/* core.new/etc/
+sed -i "s/OVTC_VERSION/${VERSION}/g" core.new/etc/os-release
 
 cp -av ${REPODIR}/src/core/usr/share/udhcpc/* core.new/usr/share/udhcpc/
 
@@ -134,12 +137,17 @@ cp corepure64.gz tmp/boot/
 cp -v ${REPODIR}/src/kernel/vmlinuz64 tmp/boot/
 
 cp -av ${REPODIR}/src/isolinux/* tmp/boot/isolinux/
+sed -i "s/OVTC_VERSION/${VERSION}/g" tmp/boot/isolinux/boot.msg
 
 mkisofs -U -J -joliet-long -A "oVirtTinyCore64" -V "oVirtTinyCore64"\
  -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat\
  -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot\
  -R -graft-points -e EFI/BOOT/efiboot.img\
- -o oVirtTinyCore64-13.9.iso\
+ -o oVirtTinyCore64-${VERSION}.iso\
  tmp/
 
 popd
+
+cat > version.auto.pkrvars.hcl << EOF
+version = "${VERSION}"
+EOF
