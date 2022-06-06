@@ -1,2 +1,2 @@
-SUBSYSTEM=="net", ACTION=="add", RUN+="/sbin/udhcpc -b -i %k -x hostname:$(/bin/hostname) -p /var/run/udhcpc.%k.pid >/dev/null 2>&1 &"
-SUBSYSTEM=="net", ACTION=="add", RUN+="/usr/bin/udhcpc6 -b -i %k -s /usr/share/udhcpc/default6.script -p /var/run/udhcpc6.%k.pid >/dev/null 2>&1 &"
+SUBSYSTEM=="net", ACTION=="add", RUN+="/sbin/udhcpc -b -i %k -x hostname:$(/bin/hostname) -p /var/run/udhcpc.%k.pid >/dev/null 2>&1 &", KERNEL=="eth*"
+SUBSYSTEM=="net", ACTION=="add", RUN+="/usr/bin/udhcpc6 -b -i %k -s /usr/share/udhcpc/default6.script -p /var/run/udhcpc6.%k.pid >/dev/null 2>&1 &", KERNEL=="eth*"
