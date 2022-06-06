@@ -15,14 +15,10 @@ log() {
 	fi
 }
 
-NETMASK=""
-if command -v ip >/dev/null; then
-	[ -n "$subnet" ] && NETMASK="/$subnet"
-else
-	[ -n "$subnet" ] && NETMASK="netmask $subnet"
+NETMASK="/64"
+if [ -n "$subnet" ]; then
+	NETMASK="/$subnet"
 fi
-BROADCAST="broadcast +"
-[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
 
 case "$1" in
 	deconfig)
@@ -40,11 +36,11 @@ case "$1" in
 	renew|bound)
 		echo "Setting IP address $ip on $interface"
 		if command -v ip >/dev/null; then
-			ip addr add $ip$NETMASK $BROADCAST dev $interface
-			log "renew: running ip addr add $ip$NETMASK $BROADCAST dev $interface"
+			ip addr add $ipv6$NETMASK dev $interface
+			log "renew: running ip addr add $ip$NETMASK dev $interface"
 		else
-			ifconfig $interface $ip $NETMASK $BROADCAST
-			log "renew: running ifconfig $interface $ip $NETMASK $BROADCAST"
+			ifconfig $interface add $ipv6$NETMASK
+			log "renew: running ifconfig $interface $ipv6$NETMASK"
 		fi
 
 		if [ -n "$router" ] ; then
