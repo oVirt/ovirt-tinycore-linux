@@ -2,9 +2,18 @@
 # udhcpc script edited by Tim Riker <Tim@Rikers.org>
 # Modifications for IPv6 by Lev Veyde <lveyde@redhat.com>
 
+LOG=yes
+LOGFILE="/var/log/udhcpc6.log"
 RESOLV_CONF="/etc/resolv.conf"
 
 [ -n "$1" ] || { echo "Error: should be called from udhcpc"; exit 1; }
+
+log() {
+	if [ -n "${LOG}" ]; then
+		TIMESTAMP=$(date +'%Y-%m-%d %H:%M')
+		echo "${TIMESTAMP}: ${1}" >> ${LOGFILE}
+	fi
+}
 
 NETMASK=""
 if command -v ip >/dev/null; then
@@ -21,8 +30,10 @@ case "$1" in
 		if command -v ip >/dev/null; then
 			ip -6 addr flush dev $interface scope global
 			ip link set dev $interface up
+			log "deconfig: running ip -6 addr flush dev $interface scope global"
 		else
 			ifconfig $interface 0.0.0.0
+			log "deconfig: running ifconfig $interface 0.0.0.0"
 		fi
 		;;
 
@@ -30,8 +41,10 @@ case "$1" in
 		echo "Setting IP address $ip on $interface"
 		if command -v ip >/dev/null; then
 			ip addr add $ip$NETMASK $BROADCAST dev $interface
+			log "renew: running ip addr add $ip$NETMASK $BROADCAST dev $interface"
 		else
 			ifconfig $interface $ip $NETMASK $BROADCAST
+			log "renew: running ifconfig $interface $ip $NETMASK $BROADCAST"
 		fi
 
 		if [ -n "$router" ] ; then
@@ -39,15 +52,18 @@ case "$1" in
 			echo "Deleting routers"
 			if command -v ip >/dev/null; then
 				while ip -6 route del ::/0 dev $interface ; do
+					log "renew: running: ip -6 route del ::/0 dev $interface"
 					:
 				done
 				metric=0
 				for i in $router ; do
 					echo "Adding router $i"
 					ip -6 route add default via $i dev $interface metric $((metric++))
+					log "renew: running: ip -6 route add default via $i dev $interface metric $metric"
 				done
 			else
 				while route -A inet6 del default gw 0.0.0.0 dev $interface ; do
+					log "renew: running: route -A inet6 del default gw 0.0.0.0 dev $interface"
 					:
 				done
 
@@ -55,6 +71,7 @@ case "$1" in
 				for i in $router ; do
 					echo "Adding router $i"
 					route -A inet6 add default gw $i dev $interface metric $((metric++))
+					log "renew: running: route -A inet6 add default gw $i dev $interface metric $metric"
 				done
 			fi
 
