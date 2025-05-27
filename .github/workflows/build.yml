@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install GenISOImage
         run: sudo apt update && sudo apt install -y genisoimage
       - name: Install Packer
@@ -21,8 +21,9 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install packer
-      - name: Install QEMU
-        run: sudo apt update && sudo apt install -y qemu-utils qemu qemu-kvm gocr
+          packer plugins install github.com/hashicorp/qemu
+      - name: Install QEMU and other dependencies
+        run: sudo apt update && sudo apt install -y qemu-system qemu-utils gocr libtirpc-dev imagemagick
       - name: Run build script
         run: sudo ./build.sh
       - name: Run Packer
@@ -36,7 +37,7 @@ jobs:
           cp -av src/busybox/busybox.tar.gz output/
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: oVirtTinyCoreLinux
           if-no-files-found: error
@@ -46,7 +47,7 @@ jobs:
         run: ./test.sh
       - name: Upload artifacts
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ScreenShot
           if-no-files-found: error
@@ -59,7 +60,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
