@@ -82,8 +82,8 @@ echo -e "\033[0m"
 convert /tmp/screendump.ppm oVirtTinyCore.png
 
 log "⚙️ Performing OCR and evaluating results..."
-if [ $(gocr -m 4 /tmp/screendump.ppm 2>/dev/null | grep 'Customized for oVirt by Lev Veyde' | wc -l) -ne 1 ]; then
-  error "❌ Test failed: the virtual machine did not print \"Customized for oVirt by Lev Veyde\" to the output when run."
+if [ $(gocr -m 4 /tmp/screendump.ppm 2>/dev/null | grep 'Customized by oVirt' | wc -l) -ne 1 ]; then
+  error "❌ Test failed: the virtual machine did not print \"Customized by oVirt\" to the output when run."
   exit 1
 fi
 

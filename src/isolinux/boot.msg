@@ -1,12 +1,13 @@
 
-ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-º                                                                      º
-º   ( '>') oVirt Tiny Core is distributed with ABSOLUTELY NO WARRANTY. º
-º  /)oVTC(\          A Busybox & Fltk minimal desktop.                 º
-º (/-_--_-\)    Based on Tiny Core Linux - www.tinycorelinux.net       º
-º                                                                      º
-º oVirt customization by Lev Veyde <lveyde@redhat.com> - Version OVTC_VERSION º
-ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»
+ï¿½                                                                      ï¿½
+ï¿½   ( '>') oVirt Tiny Core is distributed with ABSOLUTELY NO WARRANTY. ï¿½
+ï¿½  /)oVTC(\          A Busybox & Fltk minimal desktop.                 ï¿½
+ï¿½ (/-_--_-\)    Based on Tiny Core Linux - www.tinycorelinux.net       ï¿½
+ï¿½                                                                      ï¿½
+ï¿½ oVirt customization by oVirt Developers <devel@ovirt.org>            ï¿½
+ï¿½ Version OVTC_VERSION                                                 ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 
 Welcome to oVirt Tiny Core. This is a collection of extensions
 to help get started with Tiny Core Linux. It is not intended to be a 

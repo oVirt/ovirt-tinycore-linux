@@ -1,6 +1,5 @@
 #!/bin/sh
-# udhcpc script edited by Tim Riker <Tim@Rikers.org>
-# Modifications for IPv6 by Lev Veyde <lveyde@redhat.com>
+# Author: oVirt Developers <devel@ovirt.org>
 
 LOG=yes
 LOGFILE="/var/log/udhcpc6.log"
