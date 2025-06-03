@@ -4,6 +4,7 @@ oVirt TinyCore Linux is a customized version of TinyCore Linux that includes a p
 
 Currently implemented features:
 
+* SSH support
 * Qemu Guest Agent
 * IPv6 support
 * ACPI support
