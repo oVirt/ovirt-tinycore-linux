@@ -50,6 +50,8 @@ wget http://www.tinycorelinux.net/13.x/x86_64/tcz/pcre.tcz
 wget http://www.tinycorelinux.net/13.x/x86_64/tcz/pcre.tcz.md5.txt
 wget http://www.tinycorelinux.net/13.x/x86_64/tcz/qemu.tcz
 wget http://www.tinycorelinux.net/13.x/x86_64/tcz/udev-lib.tcz
+wget http://www.tinycorelinux.net/13.x/x86_64/tcz/openssh.tcz
+wget http://www.tinycorelinux.net/13.x/x86_64/tcz/openssl-1.1.1.tcz
 
 cp -av "${REPODIR}/sha256sums" .
 sha256sum -c sha256sums
@@ -106,6 +108,18 @@ umount mnt
 mount udev-lib.tcz mnt
 cp -av mnt/usr/local/lib/* core.new/usr/local/lib/
 umount mnt
+
+mount openssh.tcz mnt
+cp -av mnt/usr core.new/
+umount mnt
+
+mount openssl-1.1.1.tcz mnt
+cp -av mnt/usr core.new/
+umount mnt
+
+cp core.new/usr/local/etc/ssh/sshd_config.orig core.new/usr/local/etc/ssh/sshd_config
+mkdir core.new/var/lib/sshd
+chmod 755 core.new/var/lib/sshd
 
 cp -av ${REPODIR}/src/core/etc/* core.new/etc/
 sed -i "s/OVTC_VERSION/${VERSION}/g" core.new/etc/os-release
