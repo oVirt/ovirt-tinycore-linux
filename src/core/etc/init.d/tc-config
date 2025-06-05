@@ -649,6 +649,9 @@ if [ -z "$NOQEMUGA" ]; then
 	/usr/bin/qemu-ga -d
 fi
 
+#Always run sshd, currently we have no use-case without ssh
+/usr/local/etc/init.d/openssh start
+
 [ -n "$CRON" ] && /etc/init.d/services/crond start
 
 /sbin/loadcpufreq 2>/dev/null &
