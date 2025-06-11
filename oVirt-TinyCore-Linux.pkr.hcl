@@ -2,6 +2,12 @@ variable "version" {
     type = string
 }
 
+variable "password" {
+    type = string
+    default = "oVirtRocks"
+    sensitive = true
+}
+
 source "qemu" "qemu" {
     iso_url = "builddir/oVirtTinyCore64-${var.version}.iso"
     iso_checksum = "none"
@@ -13,18 +19,19 @@ source "qemu" "qemu" {
     net_device = "virtio-net"
     disk_interface = "virtio"
     boot_wait = "500ms"
-    headless = true
+    headless = true # Set to false, to debug during development.
     communicator = "none"
     boot_command = [
+        "<down><down><tab><wait3>",
         # Boot prompt
-        "console=ttyS1,9600 console=tty0<enter>",
+        " console=ttyS1,9600 console=tty0<enter>",
         "<wait60>",
         # Install installer
         "tce-load -wi tc-install<enter>",
-        "<wait20>",
+        "<wait30>",
         # Start installer
         "sudo tc-install.sh<enter>",
-        "<wait10>",
+        "<wait15>",
         # Install from CD
         "c<wait2><enter><wait2>",
         # Frugal
@@ -40,7 +47,7 @@ source "qemu" "qemu" {
         # ext4
         "3<wait2><enter><wait2>",
         # Boot options
-        "console=ttyS0,115200 console=tty0<wait2><enter><wait2>",
+        "console=ttyS0,115200 console=tty0 password=${var.password}<wait2><enter><wait2>",
         # Confirm
         "y<wait2><enter>",
         # Wait for installation

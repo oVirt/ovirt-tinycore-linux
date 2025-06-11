@@ -62,6 +62,7 @@ for i in `cat /proc/cmdline`; do
 				rsyslog=* ) RSYSLOG=${i#*=}; SYSLOG=1 ;;
 				blacklist* ) BLACKLIST="$BLACKLIST ${i#*=}" ;;
 				iso* ) ISOFILE=${i#*=} ;;
+				password* ) PASSWD=${i#*=}; SECURE=1;;
 			esac
 		;;
 		*)
@@ -588,9 +589,13 @@ if [ -f "/usr/share/kmap/$KEYMAP.kmap" ]; then
 fi
 
 if [ -n "$SECURE" ]; then
-	getpasswd "root"
+	if [ -z "$PASSWD" ]; then
+		getpasswd "root"
+	fi
 	echo "root:$PASSWD" | chpasswd -m
-	getpasswd "$USER"
+	if [ -z "$PASSWD" ]; then
+		getpasswd "$USER"
+	fi
 	echo "$USER:$PASSWD" | chpasswd -m
 fi
 if [ -n "$PROTECT" ]; then
