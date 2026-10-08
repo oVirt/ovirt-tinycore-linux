@@ -165,6 +165,14 @@ mkisofs -U -J -joliet-long -A "oVirtTinyCore64" -V "oVirtTinyCore64"\
 
 popd
 
-cat > version.auto.pkrvars.hcl << EOF
-version = "${VERSION}"
-EOF
+# --- disk image --------------------------------------------------------------
+# Deterministic GPT disk assembly: dual-boot legacy BIOS (SeaBIOS+extlinux)
+# and UEFI (OVMF+grub standalone). Requires root plus losetup/extlinux/
+# grub-mkstandalone; skipped otherwise.
+if [ "$(id -u)" = "0" ] && command -v losetup >/dev/null 2>&1 && \
+   command -v extlinux >/dev/null 2>&1 && command -v grub-mkstandalone >/dev/null 2>&1; then
+    "${REPODIR}"/scripts/build-disk.sh
+else
+    echo "NOTE: scripted disk build skipped (needs root + losetup/extlinux/grub-mkstandalone)."
+    echo "NOTE: no qcow2 was written to qcowbuilddir/, so ./test.sh will not work."
+fi
