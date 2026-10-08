@@ -16,18 +16,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Install GenISOImage
         run: sudo apt update && sudo apt install -y genisoimage
-      - name: Install Packer
-        run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-          sudo apt-get update && sudo apt-get install packer
-          packer plugins install github.com/hashicorp/qemu
-      - name: Install QEMU and other dependencies
-        run: sudo apt update && sudo apt install -y qemu-system qemu-utils gocr libtirpc-dev imagemagick
+      - name: Install QEMU and disk-build dependencies
+        run: sudo apt update && sudo apt install -y qemu-system qemu-utils gocr libtirpc-dev imagemagick extlinux grub-efi-amd64-bin dosfstools fdisk ovmf
       - name: Run build script
         run: sudo ./build.sh
-      - name: Run Packer
-        run: PACKER_LOG=1 packer build .
       - name: Move all artifacts to a single directory
         if: always()
         run: |
@@ -52,7 +44,7 @@ jobs:
           name: ScreenShot
           if-no-files-found: error
           path: |
-            oVirtTinyCore.png
+            oVirtTinyCore*.png
   release:
     name: Release
     needs: build
