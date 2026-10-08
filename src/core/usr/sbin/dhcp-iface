@@ -1,0 +1,34 @@
+#!/bin/sh
+# DHCP helper invoked from udev (and /etc/init.d/dhcp.sh) for a single interface.
+# udev executes RUN+ commands without a shell, so this script does the shell
+# work (redirections, backgrounding, checks) that used to live in the rule.
+
+DEVICE="$1"
+[ -n "$DEVICE" ] || exit 1
+
+# is the client for this pid file still running?
+running() {
+	[ -f "$1" ] && kill -0 "$(cat "$1" 2>/dev/null)" 2>/dev/null
+}
+
+ip link set dev "$DEVICE" up
+
+# IPv4: skip if a lease is already present or udhcpc is already running
+if ! ip -4 addr show dev "$DEVICE" 2>/dev/null | grep -q inet \
+   && ! running "/var/run/udhcpc.$DEVICE.pid"; then
+	/sbin/udhcpc -b -i "$DEVICE" \
+		-x "hostname:$(/bin/hostname)" \
+		-p "/var/run/udhcpc.$DEVICE.pid" >/dev/null 2>&1 &
+fi
+
+# IPv6: guarded on its own, so a satisfied IPv4 does not suppress it. From udev
+# this runs before ipv6 is loaded (the module is in the ipv6-netfilter extension,
+# mounted later), so it fails here and is retried by the dhcp.sh call at boot.
+if ! running "/var/run/udhcpc6.$DEVICE.pid"; then
+	modprobe ipv6 2>/dev/null
+	/usr/bin/udhcpc6 -b -i "$DEVICE" \
+		-s /usr/share/udhcpc/default6.script \
+		-p "/var/run/udhcpc6.$DEVICE.pid" >/dev/null 2>&1 &
+fi
+
+exit 0

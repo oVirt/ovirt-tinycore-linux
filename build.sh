@@ -126,6 +126,9 @@ sed -i "s/OVTC_VERSION/${VERSION}/g" core.new/etc/os-release
 
 cp -av ${REPODIR}/src/core/usr/share/udhcpc/* core.new/usr/share/udhcpc/
 
+cp -av ${REPODIR}/src/core/usr/sbin/dhcp-iface core.new/usr/sbin/
+chmod 755 core.new/usr/sbin/dhcp-iface
+
 cp -av ${REPODIR}/src/busybox/bin/busybox core.new/bin/
 
 pushd core.new/sbin
